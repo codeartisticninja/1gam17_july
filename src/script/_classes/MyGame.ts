@@ -1,7 +1,7 @@
 "use strict";
 import Game = require("./lib/Game");
 
-import MyScene  = require("./scenes/MyScene");
+import AdventureScene  = require("./scenes/AdventureScene");
 
 
 /**
@@ -10,11 +10,11 @@ import MyScene  = require("./scenes/MyScene");
 
 class MyGame extends Game {
   public scriptVars={}
-
+  
   constructor(container:string|HTMLElement) {
     super(container, 960);
     this.frameRate = 12;
-    this.addScene("main", new MyScene(this));
+    this.addScene("main", new AdventureScene(this, "./assets/maps/4door_room.json"));
     this.joypad.enable();
     this.startScene("main");
   }

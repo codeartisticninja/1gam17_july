@@ -3,6 +3,7 @@
 import Game        = require("../Game");
 import Actor       = require("./actors/Actor");
 import Sprite      = require("./actors/Sprite");
+import Scenery     = require("./actors/Scenery");
 import Vector2     = require("../utils/Vector2");
 import http        = require("http");
 
@@ -11,7 +12,7 @@ import Text        = require("./actors/Text");
 /**
  * Scene class
  * 
- * @date 02-jul-2017
+ * @date 14-jul-2017
  */
 
 class Scene {
@@ -66,6 +67,9 @@ class Scene {
               this.addActor(new Actor(this, obj));
             }
           }
+          break;
+        case "imagelayer":
+          this.addActor(new Scenery(this, layer));
           break;
       }
     }

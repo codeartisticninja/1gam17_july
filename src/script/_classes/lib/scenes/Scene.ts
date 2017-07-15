@@ -175,6 +175,7 @@ class Scene {
   }
 
   onOverlap(a:Actor|Array<Actor>, b:Actor|Array<Actor>, resolver:Function, context:Object=this) {
+    if (!(a && b && resolver)) return;
     if (a instanceof Actor) a = [ a ];
     if (b instanceof Actor) b = [ b ];
     for (var actorA of a) {

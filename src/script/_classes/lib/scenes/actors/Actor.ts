@@ -7,7 +7,7 @@ import Sprite  = require("./Sprite");
 /**
  * Actor class
  * 
- * @date 29-jun-2017
+ * @date 14-jul-2017
  */
 
 interface Animation {
@@ -54,6 +54,7 @@ class Actor {
       this.position.y = (obj.y - (obj.gid==null?0:obj.height)) || this.position.x;
       this.size.x = obj.width || 32;
       this.size.y = obj.height || this.size.x;
+      this.setAnchor(this.size.x/2, this.size.y/2);
       setTimeout(()=>{
         this._setProperties(obj);
       });
@@ -61,16 +62,16 @@ class Actor {
   }
 
   get left() {
-    return this.position.x + this.offset.x * this.scale.x;
+    return this.position.x - (this.size.x/2) * this.scale.x;
   }
   get top() {
-    return this.position.y + this.offset.y * this.scale.y;
+    return this.position.y - (this.size.y/2) * this.scale.y;
   }
   get right() {
-    return this.position.x + (this.offset.x + this.size.x) * this.scale.x;
+    return this.position.x + (this.size.x/2) * this.scale.x;
   }
   get bottom() {
-    return this.position.y + (this.offset.y + this.size.y) * this.scale.y;
+    return this.position.y + (this.size.y/2) * this.scale.y;
   }
 
   update() {
@@ -120,7 +121,12 @@ class Actor {
 
   render() {
     if (this.sprite)
-      this.sprite.draw(this.frame, 0, this.offset, this.size);
+      this.sprite.draw(this.frame, 0, this.offset);
+    if (location.search.indexOf("debug") !== -1) {
+      let g = this.scene.game.ctx;
+      g.strokeStyle = "red";
+      g.strokeRect(-(this.size.x/2), -(this.size.y/2), this.size.x, this.size.y);
+    }
   }
 
   overlapsWith(actor:Actor) {

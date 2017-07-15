@@ -51,7 +51,7 @@ class Actor {
         }
       }
       this.position.x = obj.x || 0;
-      this.position.y = (obj.y - (obj.gid==null?0:obj.height)) || this.position.x;
+      this.position.y = (obj.y - (obj.gid==null?0:obj.height)) || 0;
       this.size.x = obj.width || 32;
       this.size.y = obj.height || this.size.x;
       this.setAnchor(this.size.x/2, this.size.y/2);

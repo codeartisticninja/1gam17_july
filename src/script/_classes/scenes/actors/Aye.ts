@@ -9,8 +9,9 @@ import Scene = require("../../lib/scenes/Scene");
 class Aye extends Actor {
   constructor(scene:Scene, obj:any) {
     super(scene, obj);
-    this.setAnchor(this.size.x/2, this.size.y);
-    this.addAnimation("idle", [15]);
+    this.setAnchor(this.size.x/2, this.size.y-16);
+    this.size.set(64, 32);
+    this.addAnimation("idle", [0,1,2,3,4,5,6,7]);
     this.addAnimation("walk", [8,9,10,11,12,13,14,15]);
   }
 
@@ -27,7 +28,7 @@ class Aye extends Actor {
       }
     } else {
       this.velocity.set(0);
-      this.playAnimation("idle", true);
+      this.playAnimation("idle");
     }
     super.update();
   }

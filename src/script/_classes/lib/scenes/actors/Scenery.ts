@@ -5,7 +5,7 @@ import Scene = require("../Scene");
 /**
  * Scenery class
  * 
- * @date 14-jul-2017
+ * @date 15-jul-2017
  */
 
 class Scenery extends Actor {
@@ -19,6 +19,14 @@ class Scenery extends Actor {
     this.position.y = obj.y || this.position.x;
     this.img.src = scene.mapUrl.substr(0, scene.mapUrl.lastIndexOf("/")+1) + obj.image;
     this.opacity = obj.opacity;
+
+    if (!this.img.complete) {
+      this.scene.game.loading++;
+      this.img.addEventListener("load", () => {
+        this.scene.game.loaded++;
+      });
+    }
+
   }
 
   render () {

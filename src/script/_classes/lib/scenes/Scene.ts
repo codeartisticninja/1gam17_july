@@ -12,7 +12,7 @@ import Text        = require("./actors/Text");
 /**
  * Scene class
  * 
- * @date 14-jul-2017
+ * @date 16-jul-2017
  */
 
 class Scene {
@@ -23,6 +23,7 @@ class Scene {
   public spritesByFirstGid:Sprite[]=[];
   public spritesByName:Object = {};
   public gravity:Vector2 = new Vector2();
+  public camera:Vector2 = new Vector2();
   public mapData:any;
 
   constructor(public game:Game, public mapUrl?:string) {
@@ -84,6 +85,8 @@ class Scene {
   render() {
     if (!this.game) return false;
     var g = this.game.ctx;
+    g.save();
+    g.translate(-this.camera.x, -this.camera.y);
     for (var actor of this.actors) {
       g.save();
       g.translate(actor.position.x, actor.position.y);
@@ -93,6 +96,7 @@ class Scene {
       actor.render();
       g.restore();
     }
+    g.restore();
   }
 
   addActor(actor:Actor, ...toGroup:Array<Actor>[]) {

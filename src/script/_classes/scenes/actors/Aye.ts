@@ -12,7 +12,7 @@ class Aye extends Actor {
     this.setAnchor(this.size.x/2, this.size.y-15);
     this.size.set(60, 30);
     this.addAnimation("idle", [0,1,2,3,4,5,6,7]);
-    this.addAnimation("walk", [8,9,10,11,12,13,14,15]);
+    this.addAnimation("walk", [8,9,10,11,12,13,14,15], 0);
   }
 
   update() {
@@ -20,6 +20,7 @@ class Aye extends Actor {
     if (joy.dir.magnitude) {
       this.velocity.copyFrom(joy.dir).multiplyXY(8);
       this.playAnimation("walk");
+      this.animationFrame += joy.dir.magnitude;
       if (joy.dir.x < 0) {
         this.scale.x = -1;
       }
@@ -31,6 +32,7 @@ class Aye extends Actor {
       this.playAnimation("idle");
     }
     super.update();
+    this.scene.camera.copyFrom(this.position).subtractXY(this.scene.game.canvas.width/2, this.scene.game.canvas.height/2);
   }
 
   /*

@@ -26,6 +26,7 @@ class Actor {
   public size:Vector2 = new Vector2(32);
   public rotation:number=0;
   public opacity:number=1;
+  public parallax:number=1;
   
   public velocity:Vector2 = new Vector2();
   public gravity:Vector2;

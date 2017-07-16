@@ -4,6 +4,14 @@
          "image":"..\/backgrounds\/maze.png",
          "name":"background",
          "opacity":1,
+         "properties":
+            {
+             "parallax":1
+            },
+         "propertytypes":
+            {
+             "parallax":"float"
+            },
          "type":"imagelayer",
          "visible":true,
          "x":0,
@@ -258,6 +266,25 @@
                 }],
          "opacity":1,
          "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "image":"..\/backgrounds\/maze_top.png",
+         "name":"foreground",
+         "offsetx":-48,
+         "offsety":-27,
+         "opacity":1,
+         "properties":
+            {
+             "parallax":1.1
+            },
+         "propertytypes":
+            {
+             "parallax":"float"
+            },
+         "type":"imagelayer",
          "visible":true,
          "x":0,
          "y":0

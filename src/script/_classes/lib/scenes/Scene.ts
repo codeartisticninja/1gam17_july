@@ -85,10 +85,9 @@ class Scene {
   render() {
     if (!this.game) return false;
     var g = this.game.ctx;
-    g.save();
-    g.translate(-this.camera.x, -this.camera.y);
     for (var actor of this.actors) {
       g.save();
+      g.translate(-this.camera.x*actor.parallax, -this.camera.y*actor.parallax);
       g.translate(actor.position.x, actor.position.y);
       g.rotate(actor.rotation);
       g.scale(actor.scale.x, actor.scale.y);
@@ -96,7 +95,6 @@ class Scene {
       actor.render();
       g.restore();
     }
-    g.restore();
   }
 
   addActor(actor:Actor, ...toGroup:Array<Actor>[]) {

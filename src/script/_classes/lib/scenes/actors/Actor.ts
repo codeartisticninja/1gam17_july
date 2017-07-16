@@ -7,7 +7,7 @@ import Sprite  = require("./Sprite");
 /**
  * Actor class
  * 
- * @date 14-jul-2017
+ * @date 16-jul-2017
  */
 
 interface Animation {
@@ -62,16 +62,16 @@ class Actor {
   }
 
   get left() {
-    return this.position.x - (this.size.x/2) * this.scale.x;
+    return this.position.x - (this.size.x/2) * Math.abs(this.scale.x);
   }
   get top() {
-    return this.position.y - (this.size.y/2) * this.scale.y;
+    return this.position.y - (this.size.y/2) * Math.abs(this.scale.y);
   }
   get right() {
-    return this.position.x + (this.size.x/2) * this.scale.x;
+    return this.position.x + (this.size.x/2) * Math.abs(this.scale.x);
   }
   get bottom() {
-    return this.position.y + (this.size.y/2) * this.scale.y;
+    return this.position.y + (this.size.y/2) * Math.abs(this.scale.y);
   }
 
   update() {
@@ -132,6 +132,22 @@ class Actor {
   overlapsWith(actor:Actor) {
     return this._overlap2D(this.top, this.left, this.bottom, this.right,
       actor.top, actor.left, actor.bottom, actor.right);
+  }
+  snapToEdge(obstruction:Actor) {
+    var x=0,y=Infinity;
+    if (Math.abs(x+y) > Math.abs(obstruction.right - this.left)) {
+      x = obstruction.right - this.left; y = 0;
+    }
+    if (Math.abs(x+y) > Math.abs(obstruction.left - this.right)) {
+      x = obstruction.left - this.right; y = 0;
+    }
+    if (Math.abs(x+y) > Math.abs(obstruction.bottom - this.top)) {
+      x = 0; y = obstruction.bottom - this.top;
+    }
+    if (Math.abs(x+y) > Math.abs(obstruction.top - this.bottom)) {
+      x = 0; y = obstruction.top - this.bottom;
+    }
+    this.position.addXY(x,y);
   }
 
   setAnchor(x:number, y=x) {

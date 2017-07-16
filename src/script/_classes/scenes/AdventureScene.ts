@@ -25,7 +25,7 @@ class AdventureScene extends Scene {
   }
 
   AyeMeetsWall(aye:Aye, wall:Actor) {
-    aye.position.subtract(aye.velocity);
+    aye.snapToEdge(wall);
   }
 }
 export = AdventureScene;

@@ -12,7 +12,7 @@ import Text        = require("./actors/Text");
 /**
  * Scene class
  * 
- * @date 16-jul-2017
+ * @date 17-jul-2017
  */
 
 class Scene {
@@ -27,7 +27,6 @@ class Scene {
   public mapData:any;
 
   constructor(public game:Game, public mapUrl?:string) {
-    this.actorTypes["Text"] = Text;
   }
 
   reset() {
@@ -64,6 +63,8 @@ class Scene {
           for (var obj of layer.objects) {
             if (this.actorTypes[obj.type]) {
               this.addActor(new this.actorTypes[obj.type](this, obj));
+            } else if (obj.text) {
+              this.addActor(new Text(this, obj));
             } else {
               this.addActor(new Actor(this, obj));
             }

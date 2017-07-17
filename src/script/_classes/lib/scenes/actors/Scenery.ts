@@ -5,7 +5,7 @@ import Scene = require("../Scene");
 /**
  * Scenery class
  * 
- * @date 16-jul-2017
+ * @date 17-jul-2017
  */
 
 class Scenery extends Actor {
@@ -13,6 +13,7 @@ class Scenery extends Actor {
 
   constructor(scene:Scene, obj:any) {
     super(scene, obj);
+    this.setAnchor(0);
     this.img.src = scene.mapUrl.substr(0, scene.mapUrl.lastIndexOf("/")+1) + obj.image;
 
     if (!this.img.complete) {
@@ -33,6 +34,5 @@ class Scenery extends Actor {
   /*
     _privates
   */
-
 }
 export = Scenery;

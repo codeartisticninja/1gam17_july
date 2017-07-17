@@ -23,7 +23,7 @@
                  "visible":true,
                  "width":128,
                  "x":390,
-                 "y":525
+                 "y":435
                 }, 
                 {
                  "height":480,
@@ -90,6 +90,37 @@
                  "width":675,
                  "x":135,
                  "y":0
+                }, 
+                {
+                 "height":90,
+                 "id":10,
+                 "name":"",
+                 "properties":
+                    {
+                     "fontFamily":"Coming Soon",
+                     "outline":"#909999"
+                    },
+                 "propertytypes":
+                    {
+                     "fontFamily":"string",
+                     "outline":"string"
+                    },
+                 "rotation":0,
+                 "text":
+                    {
+                     "color":"#223344",
+                     "fontfamily":"Script",
+                     "halign":"center",
+                     "italic":true,
+                     "pixelsize":53,
+                     "text":"Choose wisely",
+                     "wrap":true
+                    },
+                 "type":"",
+                 "visible":true,
+                 "width":675,
+                 "x":135,
+                 "y":180
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -97,10 +128,10 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":9,
+ "nextobjectid":11,
  "orientation":"orthogonal",
  "renderorder":"right-down",
- "tiledversion":"2017.06.27",
+ "tiledversion":"2017.07.11",
  "tileheight":60,
  "tilesets":[
         {

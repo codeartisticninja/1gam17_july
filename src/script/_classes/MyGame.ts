@@ -14,9 +14,10 @@ class MyGame extends Game {
   constructor(container:string|HTMLElement) {
     super(container, 960);
     this.frameRate = 12;
-    this.addScene("main", new AdventureScene(this, "./assets/maps/maze.json"));
+    this.addScene("4door_room", new AdventureScene(this, "./assets/maps/4door_room.json"));
+    this.addScene("maze", new AdventureScene(this, "./assets/maps/maze.json"));
     this.joypad.enable();
-    this.startScene("main");
+    this.startScene("4door_room");
   }
 
 }

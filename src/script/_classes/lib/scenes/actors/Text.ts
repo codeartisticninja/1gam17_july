@@ -92,9 +92,10 @@ class Text extends Actor {
     var g = this.scene.game.ctx, i = 0, y = 0;
     this._lines = this._text.split("\n");
     while (i < this._lines.length && y < this.size.y) {
-      while (g.measureText(this._lines[i]).width > this.size.x) {
+      if (g.measureText(this._lines[i]).width > this.size.x) {
         this._lines.splice(i+1, 0, "");
-        // this._lines[i+1] = this._lines[i+1] || "";
+      }
+      while (g.measureText(this._lines[i]).width > this.size.x) {
         this._lines[i+1] = (this._lines[i].substr(this._lines[i].lastIndexOf(" ")) + " " + this._lines[i+1]).trim();
         this._lines[i] = this._lines[i].substr(0, this._lines[i].lastIndexOf(" ")).trim();
       }

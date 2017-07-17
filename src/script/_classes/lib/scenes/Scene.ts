@@ -22,11 +22,14 @@ class Scene {
   public actorsByName:Object = {};
   public spritesByFirstGid:Sprite[]=[];
   public spritesByName:Object = {};
+  public size:Vector2 = new Vector2();
   public gravity:Vector2 = new Vector2();
   public camera:Vector2 = new Vector2();
+  public boundCamera=true;
   public mapData:any;
 
   constructor(public game:Game, public mapUrl?:string) {
+    this.size.set(game.canvas.width, game.canvas.height);
   }
 
   reset() {
@@ -54,6 +57,7 @@ class Scene {
 
   loadMap() {
     var mapFolder = this.mapUrl.substr(0, this.mapUrl.lastIndexOf("/")+1);
+    this.size.set(this.mapData.width*this.mapData.tilewidth, this.mapData.height*this.mapData.tileheight);
     for (var tileset of this.mapData.tilesets) {
       this.addSprite(new Sprite(tileset, mapFolder));
     }
@@ -80,6 +84,12 @@ class Scene {
   update() {
     for (var actor of this.actors) {
       actor.update();
+    }
+    if (this.boundCamera) {
+      this.camera.x = Math.max(this.camera.x, 0);
+      this.camera.y = Math.max(this.camera.y, 0);
+      this.camera.x = Math.min(this.camera.x, this.size.x-this.game.canvas.width);
+      this.camera.y = Math.min(this.camera.y, this.size.y-this.game.canvas.height);
     }
   }
 

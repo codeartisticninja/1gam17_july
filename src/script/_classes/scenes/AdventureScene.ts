@@ -8,6 +8,7 @@ import Script      = require("../lib/utils/Script");
 
 import Aye         = require("./actors/Aye");
 import Trigger     = require("./actors/Trigger");
+import Dialog      = require("./actors/Dialog");
 
 /**
  * AdventureScene class
@@ -23,8 +24,16 @@ class AdventureScene extends Scene {
     this.actorTypes["Trigger"] = Trigger;
   }
 
+  reset() {
+    super.reset();
+    this.addActor(new Dialog(this));
+  }
+
   loadScript(url:string) {
     this.script = new Script(url, this.game.scriptVars);
+    this.script.commands["p"] = (attrs:any, body:string, el:Element, cb:Function) => {
+      this.actorsByType["Dialog"][0].say(body, cb);
+    }
     this.script.commands["scene"] = (attrs:any, body:string) => {
       this.game.startScene(body);
     }

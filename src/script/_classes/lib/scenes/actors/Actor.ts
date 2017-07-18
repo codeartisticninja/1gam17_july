@@ -28,6 +28,8 @@ class Actor {
   public rotation:number=0;
   public opacity:number=1;
   public parallax:number=1;
+  public order:number=0;
+  public visible:boolean=true;
   
   public velocity:Vector2 = new Vector2();
   public gravity:Vector2;
@@ -46,6 +48,7 @@ class Actor {
     if (obj) {
       this.name = obj.name;
       this.type = obj.type;
+      this.visible = obj.visible;
       if (obj.gid != null) {
         this.sprite = this.scene.getSpriteByGid(obj.gid);
         if (this.frame < 0) {

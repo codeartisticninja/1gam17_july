@@ -84,8 +84,17 @@ class Scene {
   }
 
   update() {
+    let i=0;
     for (var actor of this.actors) {
       actor.update();
+      if (i) {
+        if (this.actors[i].order < this.actors[i-1].order) {
+          let a = this.actors[i];
+          this.actors[i] = this.actors[i-1];
+          this.actors[i-1] = a;
+        }
+      }
+      i++;
     }
     if (this.boundCamera) {
       this.camera.x = Math.max(this.camera.x, 0);
@@ -99,14 +108,16 @@ class Scene {
     if (!this.game) return false;
     var g = this.game.ctx;
     for (var actor of this.actors) {
-      g.save();
-      g.translate(-this.camera.x*actor.parallax, -this.camera.y*actor.parallax);
-      g.translate(actor.position.x, actor.position.y);
-      g.rotate(actor.rotation);
-      g.scale(actor.scale.x, actor.scale.y);
-      g.globalAlpha = actor.opacity;
-      actor.render();
-      g.restore();
+      if (actor.visible) {
+        g.save();
+        g.translate(-this.camera.x*actor.parallax, -this.camera.y*actor.parallax);
+        g.translate(actor.position.x, actor.position.y);
+        g.rotate(actor.rotation);
+        g.scale(actor.scale.x, actor.scale.y);
+        g.globalAlpha = actor.opacity;
+        actor.render();
+        g.restore();
+      }
     }
   }
 

@@ -17,7 +17,7 @@ class Aye extends Actor {
 
   update() {
     var joy = this.scene.game.joypad;
-    if (joy.dir.magnitude) {
+    if (joy.dir.magnitude && !this.scene.actorsByType["Dialog"][0].visible) {
       this.velocity.copyFrom(joy.dir).multiplyXY(8);
       this.playAnimation("walk");
       this.animationFrame += joy.dir.magnitude;

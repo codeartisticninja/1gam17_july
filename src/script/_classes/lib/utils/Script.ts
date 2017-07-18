@@ -13,13 +13,11 @@ class Script {
   // public next:Element;
 
   constructor(url?:string, public variables={}) {
-    this.commands["p"] = (attrs:any, body:string, el:Element, next:Element) => {
+    this.commands["p"] = (attrs:any, body:string, el:Element, cb:Function) => {
       console.log(body);
-      setTimeout(()=>{
-        this.continue(next);
-      }, body.length*100);
+      setTimeout(cb, body.length*100);
     }
-    this.commands["pre"] = (attrs:any, body:string, el:Element, next:Element) => {
+    this.commands["pre"] = (attrs:any, body:string) => {
       this.goto(body.trim()||"+");
     }
     if (url) this.load(url, ()=>{ this.goto("story"); });
@@ -32,7 +30,6 @@ class Script {
     r.onreadystatechange = () => {
       if (r.readyState != 4 || r.status != 200) return;
       this.storyTree = r.response;
-      // this.next = this.storyTree.firstElementChild;
       cb && cb();
     };
     r.send();
@@ -52,7 +49,9 @@ class Script {
       var el = <Element>this.storyTree.importNode(current, true);
       this._cullChildren(el);
       var body = this._evaluate(el.textContent);
-      this.commands[current.tagName](attrs, body, el, current.nextElementSibling);
+      this.commands[current.tagName](attrs, body, el, ()=>{
+        this.continue(current.nextElementSibling);
+      });
     } else {
       current.setAttribute("visits", this.getVisits("")+1);
       this.continue(current.firstElementChild);

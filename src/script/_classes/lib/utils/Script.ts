@@ -10,20 +10,19 @@ class Script {
   public storyTree:XMLDocument;
   public commands: { [key:string]:Function }={};
   public current:Element;
-  public next:Element;
+  // public next:Element;
 
   constructor(url?:string, public variables={}) {
-    this.commands["p"] = (attrs:any, body:string) => {
+    this.commands["p"] = (attrs:any, body:string, el:Element, next:Element) => {
       console.log(body);
       setTimeout(()=>{
-        this.continue();
+        this.continue(next);
       }, body.length*100);
     }
-    this.commands["pre"] = (attrs:any, body:string, el:Element) => {
-      console.log(attrs, body, el);
-      this.continue();
+    this.commands["pre"] = (attrs:any, body:string, el:Element, next:Element) => {
+      this.goto(body.trim()||"+");
     }
-    if (url) this.load(url, ()=>{ this.continue(); });
+    if (url) this.load(url, ()=>{ this.goto("story"); });
   }
 
   load(url:string, cb?:Function) {
@@ -33,36 +32,36 @@ class Script {
     r.onreadystatechange = () => {
       if (r.readyState != 4 || r.status != 200) return;
       this.storyTree = r.response;
-      this.next = this.storyTree.firstElementChild;
+      // this.next = this.storyTree.firstElementChild;
       cb && cb();
     };
     r.send();
   }
 
-  continue(next=this.next) {
-    this.current = next;
-    if (!this.current) return;
-    var cond = this._lazyJSON(this._evaluate(this.current.getAttribute("if") || "true"));
+  continue(current:Element) {
+    this.current = current;
+    if (!current) return;
+    var cond = this._lazyJSON(this._evaluate(current.getAttribute("if") || "true"));
     if (!cond) {
-      this.continue(this.current.nextElementSibling);
+      this.continue(current.nextElementSibling);
       return;
     }
-    if (this.commands[this.current.tagName]) {
-      this.next = this.current.nextElementSibling;
-      this._IdChildren(this.current);
-      var attrs = this._getAttributes(this.current);
-      var el = <Element>this.storyTree.importNode(this.current, true);
+    if (this.commands[current.tagName]) {
+      this._IdChildren(current);
+      var attrs = this._getAttributes(current);
+      var el = <Element>this.storyTree.importNode(current, true);
       this._cullChildren(el);
       var body = this._evaluate(el.textContent);
-      this.commands[this.current.tagName](attrs, body, el);
+      this.commands[current.tagName](attrs, body, el, current.nextElementSibling);
     } else {
-      this.current.setAttribute("visits", this.getVisits("")+1);
-      this.next = this.current.firstElementChild;
-      this.continue();
+      current.setAttribute("visits", this.getVisits("")+1);
+      this.continue(current.firstElementChild);
     }
+    this.current = null;
   }
 
   goto(path:string) {
+    console.log("GOTO", path);
     this.continue(this.getElement(path));
   }
 

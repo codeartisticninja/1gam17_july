@@ -10,7 +10,7 @@ import Aye         = require("./actors/Aye");
 import Trigger     = require("./actors/Trigger");
 
 /**
- * MyScene class
+ * AdventureScene class
  */
 
 class AdventureScene extends Scene {
@@ -25,6 +25,9 @@ class AdventureScene extends Scene {
 
   loadScript(url:string) {
     this.script = new Script(url, this.game.scriptVars);
+    this.script.commands["scene"] = (attrs:any, body:string) => {
+      this.game.startScene(body);
+    }
   }
 
   update() {

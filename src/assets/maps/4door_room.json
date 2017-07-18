@@ -23,7 +23,7 @@
                  "visible":true,
                  "width":128,
                  "x":390,
-                 "y":435
+                 "y":555
                 }, 
                 {
                  "height":480,
@@ -45,7 +45,7 @@
                  "visible":true,
                  "width":960,
                  "x":0,
-                 "y":525
+                 "y":540
                 }, 
                 {
                  "height":540,
@@ -126,6 +126,14 @@
                  "height":90,
                  "id":11,
                  "name":"",
+                 "properties":
+                    {
+                     "goto":"#maze"
+                    },
+                 "propertytypes":
+                    {
+                     "goto":"string"
+                    },
                  "rotation":0,
                  "type":"Trigger",
                  "visible":true,

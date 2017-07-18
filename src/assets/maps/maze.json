@@ -262,7 +262,26 @@
                  "visible":true,
                  "width":128,
                  "x":1035,
-                 "y":1905
+                 "y":1920
+                }, 
+                {
+                 "height":60,
+                 "id":26,
+                 "name":"",
+                 "properties":
+                    {
+                     "goto":"#the_4door_room"
+                    },
+                 "propertytypes":
+                    {
+                     "goto":"string"
+                    },
+                 "rotation":0,
+                 "type":"Trigger",
+                 "visible":true,
+                 "width":375,
+                 "x":930,
+                 "y":1920
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -270,8 +289,16 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":26,
+ "nextobjectid":27,
  "orientation":"orthogonal",
+ "properties":
+    {
+     "loadScript":".\/assets\/story\/maze.xml"
+    },
+ "propertytypes":
+    {
+     "loadScript":"string"
+    },
  "renderorder":"right-down",
  "tiledversion":"2017.07.11",
  "tileheight":60,

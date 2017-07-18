@@ -1,15 +1,17 @@
 "use strict";
 import Actor = require("../../lib/scenes/actors/Actor");
-import Scene = require("../../lib/scenes/Scene");
+import AdventureScene = require("../AdventureScene");
 
 /**
  * Trigger class
  */
 
 class Trigger extends Actor {
+  public scene:AdventureScene;
   public lock=3;
+  public goto:string;
 
-  constructor(scene:Scene, obj:any) {
+  constructor(scene:AdventureScene, obj:any) {
     super(scene, obj);
   }
 
@@ -24,7 +26,7 @@ class Trigger extends Actor {
 
   trigger() {
     if (!this.lock) {
-      console.log("triggered!!!");
+      this.scene.script.goto(this.goto);
     }
     this.lock = 3;
   }

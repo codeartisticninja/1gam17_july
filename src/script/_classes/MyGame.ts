@@ -17,7 +17,7 @@ class MyGame extends Game {
     this.addScene("4door_room", new AdventureScene(this, "./assets/maps/4door_room.json"));
     this.addScene("maze", new AdventureScene(this, "./assets/maps/maze.json"));
     this.joypad.enable();
-    this.startScene("maze");
+    this.startScene("4door_room");
   }
 
 }

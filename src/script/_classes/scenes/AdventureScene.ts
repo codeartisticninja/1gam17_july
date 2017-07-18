@@ -6,6 +6,7 @@ import Actor       = require("../lib/scenes/actors/Actor");
 import MediaPlayer = require("../lib/utils/MediaPlayer");
 
 import Aye         = require("./actors/Aye");
+import Trigger     = require("./actors/Trigger");
 
 /**
  * MyScene class
@@ -17,15 +18,21 @@ class AdventureScene extends Scene {
   constructor(game:myGame, map:string) {
     super(game, map);
     this.actorTypes["Aye"] = Aye;
+    this.actorTypes["Trigger"] = Trigger;
   }
 
   update() {
     super.update();
+    this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Trigger"], this.AyeMeetsTrigger, this);
     this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Wall"], this.AyeMeetsWall, this);
   }
 
   AyeMeetsWall(aye:Aye, wall:Actor) {
     aye.snapToEdge(wall);
+  }
+
+  AyeMeetsTrigger(aye:Aye, trigger:Trigger) {
+    trigger.trigger();
   }
 }
 export = AdventureScene;

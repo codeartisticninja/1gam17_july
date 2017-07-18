@@ -1,13 +1,14 @@
 "use strict";
-import Scene   = require("../Scene");
-import Vector2 = require("../../utils/Vector2");
-import Sprite  = require("./Sprite");
+import Scene    = require("../Scene");
+import Vector2  = require("../../utils/Vector2");
+import Sprite   = require("./Sprite");
+import lazyJSON = require("../../utils/lazyJSON");
 
 
 /**
  * Actor class
  * 
- * @date 16-jul-2017
+ * @date 18-jul-2017
  */
 
 interface Animation {
@@ -57,7 +58,7 @@ class Actor {
       this.size.y = obj.height || this.size.x;
       this.setAnchor(this.size.x/2, this.size.y/2);
       setTimeout(()=>{
-        this._setProperties(obj);
+        lazyJSON.setProperties(obj.properties, this);
       });
     }
   }
@@ -125,7 +126,6 @@ class Actor {
       this.sprite.draw(this.frame, 0, this.offset);
     if (location.search.indexOf("debug") !== -1) {
       let g = this.scene.game.ctx;
-      g.strokeStyle = "red";
       g.strokeRect(-(this.size.x/2), -(this.size.y/2), this.size.x, this.size.y);
     }
   }
@@ -191,34 +191,6 @@ class Actor {
       bx1:number, by1:number, bx2:number, by2:number) {
     return this._overlap1D(ax1, ax2, bx1, bx2) &&
       this._overlap1D(ay1, ay2, by1, by2);
-  }
-
-  private _lazyJSON(json:string) {
-    try {
-      return JSON.parse(json);
-    } catch (err) {
-      return json;
-    }
-  }
-
-  private _setProperties(obj:any) {
-    if (obj.properties) {
-      for (var key in obj.properties) {
-        var val = this._lazyJSON(obj.properties[key]);
-        if (typeof this[key] === "function") {
-          if (!(val instanceof Array)) val = [val];
-          this[key].apply(this, val);
-        } else if (this[key] instanceof Vector2) {
-          if (val instanceof Array) {
-            this[key].set.apply(this[key], val);
-          } else {
-            this[key].copyFrom(val);
-          }
-        } else {
-          this[key] = val;
-        }
-      }
-    }
   }
 
 }

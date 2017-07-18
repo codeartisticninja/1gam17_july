@@ -3,7 +3,7 @@
 /**
  * Script class
  * 
- * @date 22-may-2017
+ * @date 18-jul-2017
  */
 
 class Script {
@@ -13,6 +13,16 @@ class Script {
   public next:Element;
 
   constructor(url?:string, public variables={}) {
+    this.commands["p"] = (attrs:any, body:string) => {
+      console.log(body);
+      setTimeout(()=>{
+        this.continue();
+      }, body.length*100);
+    }
+    this.commands["pre"] = (attrs:any, body:string, el:Element) => {
+      console.log(attrs, body, el);
+      this.continue();
+    }
     if (url) this.load(url, ()=>{ this.continue(); });
   }
 

@@ -6,13 +6,14 @@ import Sprite      = require("./actors/Sprite");
 import Scenery     = require("./actors/Scenery");
 import Vector2     = require("../utils/Vector2");
 import http        = require("http");
+import lazyJSON    = require("../utils/lazyJSON");
 
 import Text        = require("./actors/Text");
 
 /**
  * Scene class
  * 
- * @date 17-jul-2017
+ * @date 18-jul-2017
  */
 
 class Scene {
@@ -79,6 +80,7 @@ class Scene {
           break;
       }
     }
+    lazyJSON.setProperties(this.mapData.properties, this);
   }
 
   update() {

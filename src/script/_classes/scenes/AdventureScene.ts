@@ -4,6 +4,7 @@ import myGame      = require("../MyGame");
 import Sprite      = require("../lib/scenes/actors/Sprite");
 import Actor       = require("../lib/scenes/actors/Actor");
 import MediaPlayer = require("../lib/utils/MediaPlayer");
+import Script      = require("../lib/utils/Script");
 
 import Aye         = require("./actors/Aye");
 import Trigger     = require("./actors/Trigger");
@@ -14,11 +15,16 @@ import Trigger     = require("./actors/Trigger");
 
 class AdventureScene extends Scene {
   public game:myGame;
+  public script:Script;
 
   constructor(game:myGame, map:string) {
     super(game, map);
     this.actorTypes["Aye"] = Aye;
     this.actorTypes["Trigger"] = Trigger;
+  }
+
+  loadScript(url:string) {
+    this.script = new Script(url, this.game.scriptVars);
   }
 
   update() {

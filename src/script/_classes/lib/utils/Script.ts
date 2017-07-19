@@ -3,7 +3,7 @@
 /**
  * Script class
  * 
- * @date 18-jul-2017
+ * @date 19-jul-2017
  */
 
 class Script {
@@ -30,6 +30,7 @@ class Script {
     r.onreadystatechange = () => {
       if (r.readyState != 4 || r.status != 200) return;
       this.storyTree = r.response;
+      this._IdEverything();
       cb && cb();
     };
     r.send();
@@ -44,7 +45,6 @@ class Script {
       return;
     }
     if (this.commands[current.tagName]) {
-      this._IdChildren(current);
       var attrs = this._getAttributes(current);
       var el = <Element>this.storyTree.importNode(current, true);
       this._cullChildren(el);
@@ -53,7 +53,7 @@ class Script {
         this.continue(current.nextElementSibling);
       });
     } else {
-      current.setAttribute("visits", this.getVisits("")+1);
+      this.variables[current.id+"_visits"] = this.getVisits("")+1;
       this.continue(current.firstElementChild);
     }
     this.current = null;
@@ -66,7 +66,7 @@ class Script {
 
   getVisits(path:string, el?:Element) {
     var el = this.getElement(path, el);
-    return this._lazyJSON(el.getAttribute("visits")) || 0;
+    return this.variables[el.id+"_visits"] || 0;
   }
   getElement(path:string, el=this.current) {
     while (path) {
@@ -110,13 +110,15 @@ class Script {
     }
   }
 
-  private _IdChildren(el:Element) {
-    var child = el.firstElementChild;
-    while (child) {
-      if (!child.id) {
-        child.id = "_" + (this._nextId++);
+  private _IdEverything() {
+    var els = this.storyTree.querySelectorAll("*");
+    var el:Element, i=0;
+    while (i < els.length) {
+      el = els.item(i);
+      if (!el.id) {
+        el.id = "_" + (this._nextId++);
       }
-      child = child.nextElementSibling;
+      i++;
     }
   }
   private _cullChildren(el:Element) {

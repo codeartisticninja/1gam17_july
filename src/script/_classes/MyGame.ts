@@ -16,6 +16,7 @@ class MyGame extends Game {
     this.frameRate = 12;
     this.addScene("4door_room", new AdventureScene(this, "./assets/maps/4door_room.json"));
     this.addScene("maze", new AdventureScene(this, "./assets/maps/maze.json"));
+    this.joypad.mode = "gc";
     this.joypad.enable();
     this.startScene("4door_room");
   }

@@ -10,7 +10,6 @@ import Text           = require("../../lib/scenes/actors/Text");
 class Dialog extends Actor {
   public scene:AdventureScene;
   public lock=3;
-  public text:Text;
 
   constructor(scene:AdventureScene) {
     super(scene, {
@@ -27,9 +26,9 @@ class Dialog extends Actor {
       }
     });
     var m = 20;
-    this.text = new Text(scene, {
+    this._text = new Text(scene, {
       "x":m,
-      "y":m,
+      "y":m/2,
       "width":scene.game.canvas.width-2*m,
       "height":scene.game.canvas.height*.25-2*m,
       "properties":{
@@ -47,10 +46,22 @@ class Dialog extends Actor {
 
   update() {
     let joy = this.scene.game.joypad;
-    if (this._cb && joy.delta.fire === 1) {
-      this.visible = false;
-      this._cb();
-      this._cb = null;
+    let cb = this._cb;
+    if (this._chars < this._msg.length) {
+      this._chars+=2;
+      this._text.text = this._msg.substr(0, this._chars);
+    } else {
+      this._text.text = this._msg;
+    }
+    if (cb && joy.delta.fire === 1) {
+      if (this._chars < this._msg.length) {
+        this._chars = this._msg.length;
+      } else {
+        this.visible = false;
+        this._msg = "";
+        this._cb = null;
+        cb();
+      }
     }
   }
 
@@ -60,23 +71,25 @@ class Dialog extends Actor {
     g.fillStyle = "#ffffee";
     g.fillRect(this.offset.x, this.offset.y, this.size.x, this.size.y);
     g.translate(this.offset.x, this.offset.y);
-    g.translate(this.text.position.x, this.text.position.y);
-    this.text.render();
+    g.translate(this._text.position.x+Math.random(), this._text.position.y+Math.random());
+    this._text.render();
   }
 
   say(txt:string, cb:Function) {
     this.visible = true;
-    this.text.text = txt;
-    this._cb = null;
-    setTimeout(()=>{
-      this._cb = cb;
-    }, 128);
+    this._msg = txt;
+    this._chars = 0;
+    this._cb = cb;
   }
 
   /*
     _privates
   */
+  private _msg:string="fuck";
+  private _chars:number=0;
   private _cb:Function;
+  private _text:Text;
+
 
 }
 export = Dialog;

@@ -266,11 +266,22 @@
                 }, 
                 {
                  "height":60,
+                 "id":27,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":375,
+                 "x":915,
+                 "y":1920
+                }, 
+                {
+                 "height":60,
                  "id":26,
                  "name":"",
                  "properties":
                     {
-                     "goto":"#the_4door_room"
+                     "goto":"#start_of_maze"
                     },
                  "propertytypes":
                     {
@@ -280,8 +291,38 @@
                  "type":"Trigger",
                  "visible":true,
                  "width":375,
-                 "x":930,
+                 "x":945,
                  "y":1920
+                }, 
+                {
+                 "height":60,
+                 "id":28,
+                 "name":"",
+                 "properties":
+                    {
+                     "goto":"#end_of_maze"
+                    },
+                 "propertytypes":
+                    {
+                     "goto":"string"
+                    },
+                 "rotation":0,
+                 "type":"Trigger",
+                 "visible":true,
+                 "width":375,
+                 "x":660,
+                 "y":-60
+                }, 
+                {
+                 "height":60,
+                 "id":29,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":360,
+                 "x":690,
+                 "y":-60
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -289,7 +330,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":27,
+ "nextobjectid":30,
  "orientation":"orthogonal",
  "properties":
     {

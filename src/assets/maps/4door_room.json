@@ -128,7 +128,7 @@
                  "name":"",
                  "properties":
                     {
-                     "goto":"#maze"
+                     "goto":"#door2"
                     },
                  "propertytypes":
                     {
@@ -145,6 +145,14 @@
                  "height":90,
                  "id":12,
                  "name":"",
+                 "properties":
+                    {
+                     "goto":"#door3"
+                    },
+                 "propertytypes":
+                    {
+                     "goto":"string"
+                    },
                  "rotation":0,
                  "type":"Trigger",
                  "visible":true,
@@ -156,6 +164,14 @@
                  "height":120,
                  "id":13,
                  "name":"",
+                 "properties":
+                    {
+                     "goto":"#door1"
+                    },
+                 "propertytypes":
+                    {
+                     "goto":"string"
+                    },
                  "rotation":0,
                  "type":"Trigger",
                  "visible":true,
@@ -167,6 +183,14 @@
                  "height":135,
                  "id":14,
                  "name":"",
+                 "properties":
+                    {
+                     "goto":"#door4"
+                    },
+                 "propertytypes":
+                    {
+                     "goto":"string"
+                    },
                  "rotation":0,
                  "type":"Trigger",
                  "visible":true,

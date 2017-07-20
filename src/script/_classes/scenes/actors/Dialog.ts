@@ -15,22 +15,22 @@ class Dialog extends Actor {
     super(scene, {
       "type":"Dialog",
       "x":0,
-      "y":scene.game.canvas.height*.75,
+      "y":scene.game.canvas.height-42,
       "width":scene.game.canvas.width,
-      "height":scene.game.canvas.height*.25,
+      "height":42,
       "visible":false,
       "properties":{
         "parallax":0,
         "order": 1024,
-        "opacity": .9
+        "opacity": .75
       }
     });
     var m = 20;
     this._text = new Text(scene, {
       "x":m,
-      "y":m/2,
-      "width":scene.game.canvas.width-2*m,
-      "height":scene.game.canvas.height*.25-2*m,
+      "y":0,
+      "width":this.size.x-2*m,
+      "height":this.size.y,
       "properties":{
         "fontFamily":"Coming Soon",
         "outline":"#909999"
@@ -56,6 +56,9 @@ class Dialog extends Actor {
     if (cb && joy.delta.fire === 1) {
       if (this._chars < this._msg.length) {
         this._chars = this._msg.length;
+      } else if(this._lines && this._lines.length) {
+        this._msg = this._lines.shift();
+        this._chars = 0;
       } else {
         this.visible = false;
         this._msg = "";
@@ -76,8 +79,12 @@ class Dialog extends Actor {
   }
 
   say(txt:string, cb:Function) {
+    this._text.text = txt;
+    this._text.render();
+    this._lines = this._text.lines;
+    this._msg = this._lines.shift();
+
     this.visible = true;
-    this._msg = txt;
     this._chars = 0;
     this._cb = cb;
   }
@@ -89,6 +96,7 @@ class Dialog extends Actor {
   private _chars:number=0;
   private _cb:Function;
   private _text:Text;
+  private _lines:string[];
 
 
 }

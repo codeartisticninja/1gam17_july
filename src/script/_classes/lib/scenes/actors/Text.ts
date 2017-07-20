@@ -5,7 +5,7 @@ import Scene = require("../Scene")
 /**
  * Text class
  * 
- * @date 17-jul-2017
+ * @date 19-jul-2017
  */
 
 class Text extends Actor {
@@ -16,10 +16,13 @@ class Text extends Actor {
   public textBaseline:string="top";
   public color:string="";
   public outline:string;
+  public lines:string[];
 
   set text(txt:string) {
-    this._text = txt;
-    this._lines = null;
+    if (this._text != txt) {
+      this._text = txt;
+      this.lines = null;
+    }
   }
   get text() {
     return this._text;
@@ -62,11 +65,11 @@ class Text extends Actor {
     g.font = this.fontStyle + " " + this.fontSize + "px " + this.fontFamily;
     g.textBaseline = this.textBaseline;
     g.textAlign    = this.textAlign;
-    if (!this._lines) this._wrap();
+    if (!this.lines) this._wrap();
     if (this.color) {
       y = 0;
       g.fillStyle = this.color;
-      for (var txt of this._lines) {
+      for (var txt of this.lines) {
         g.fillText(txt, x, y);
         y += this.fontSize * this.lineHeight;
       }
@@ -74,7 +77,7 @@ class Text extends Actor {
     if (this.outline) {
       y = 0;
       g.strokeStyle = this.outline;
-      for (var txt of this._lines) {
+      for (var txt of this.lines) {
         g.strokeText(txt, x, y);
         y += this.fontSize * this.lineHeight;
       }
@@ -86,18 +89,17 @@ class Text extends Actor {
   */
   public _textAlign:string="left";
   private _text:string="";
-  private _lines:string[];
 
   private _wrap() {
     var g = this.scene.game.ctx, i = 0, y = 0;
-    this._lines = this._text.split("\n");
-    while (i < this._lines.length && y < this.size.y) {
-      if (g.measureText(this._lines[i]).width > this.size.x) {
-        this._lines.splice(i+1, 0, "");
+    this.lines = this._text.split("\n");
+    while (i < this.lines.length) {
+      if (g.measureText(this.lines[i]).width > this.size.x) {
+        this.lines.splice(i+1, 0, "");
       }
-      while (g.measureText(this._lines[i]).width > this.size.x) {
-        this._lines[i+1] = (this._lines[i].substr(this._lines[i].lastIndexOf(" ")) + " " + this._lines[i+1]).trim();
-        this._lines[i] = this._lines[i].substr(0, this._lines[i].lastIndexOf(" ")).trim();
+      while (g.measureText(this.lines[i]).width > this.size.x) {
+        this.lines[i+1] = (this.lines[i].substr(this.lines[i].lastIndexOf(" ")) + " " + this.lines[i+1]).trim();
+        this.lines[i] = this.lines[i].substr(0, this.lines[i].lastIndexOf(" ")).trim();
       }
       i++;
       y += this.fontSize * this.lineHeight;

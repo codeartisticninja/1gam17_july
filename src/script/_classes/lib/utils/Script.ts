@@ -3,10 +3,11 @@
 /**
  * Script class
  * 
- * @date 19-jul-2017
+ * @date 20-jul-2017
  */
 
 class Script {
+  public url:string;
   public storyTree:XMLDocument;
   public commands: { [key:string]:Function }={};
   public current:Element;
@@ -29,6 +30,7 @@ class Script {
     r.open("GET", url, true);
     r.onreadystatechange = () => {
       if (r.readyState != 4 || r.status != 200) return;
+      this.url = url;
       this.storyTree = r.response;
       this._IdEverything();
       cb && cb();
@@ -53,7 +55,7 @@ class Script {
         this.continue(current.nextElementSibling);
       });
     } else {
-      this.variables[current.id+"_visits"] = this.getVisits("")+1;
+      this.variables[current.id+"_v"] = this.getVisits("")+1;
       this.continue(current.firstElementChild);
     }
     this.current = null;
@@ -66,7 +68,7 @@ class Script {
 
   getVisits(path:string, el?:Element) {
     var el = this.getElement(path, el);
-    return this.variables[el.id+"_visits"] || 0;
+    return this.variables[el.id+"_v"] || 0;
   }
   getElement(path:string, el=this.current) {
     while (path) {
@@ -113,10 +115,11 @@ class Script {
   private _IdEverything() {
     var els = this.storyTree.querySelectorAll("*");
     var el:Element, i=0;
+    var name = this.url.substr(this.url.lastIndexOf("/")+1).replace(".xml", "");
     while (i < els.length) {
       el = els.item(i);
       if (!el.id) {
-        el.id = "_" + (this._nextId++);
+        el.id = "_" + name + (this._nextId++);
       }
       i++;
     }

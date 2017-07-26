@@ -14,9 +14,9 @@ class Dialog extends Actor {
   constructor(scene:AdventureScene) {
     super(scene, {
       "type":"Dialog",
-      "x":0,
-      "y":scene.game.canvas.height-42,
-      "width":scene.game.canvas.width,
+      "x":8,
+      "y":scene.game.canvas.height-8-42,
+      "width":scene.game.canvas.width-16,
       "height":42,
       "visible":false,
       "properties":{

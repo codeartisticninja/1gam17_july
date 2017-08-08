@@ -14,11 +14,19 @@ class MyGame extends Game {
   constructor(container:string|HTMLElement) {
     super(container, 960);
     this.frameRate = 12;
-    this.addScene("4door_room", new AdventureScene(this, "./assets/maps/4door_room.json"));
-    this.addScene("maze", new AdventureScene(this, "./assets/maps/maze.json"));
+    this.addScene("bedroom", new AdventureScene(this, "./assets/maps/bedroom.json"));
+    this.addScene("dream",   new AdventureScene(this, "./assets/maps/dream.json"));
     this.joypad.mode = "gc";
     this.joypad.enable();
-    this.startScene("4door_room");
+    this.startScene("dream");
+  }
+
+  startScene(sceneName:string) {
+    for (let name in this.scenes) {
+      document.body.parentElement.classList.remove(name);
+    }
+    document.body.parentElement.classList.add(sceneName);
+    super.startScene(sceneName);
   }
 
 }

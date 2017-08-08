@@ -32,11 +32,10 @@ class Dialog extends Actor {
       "width":this.size.x-2*m,
       "height":this.size.y,
       "properties":{
-        "fontFamily":"Coming Soon",
-        "outline":"#909999"
+        "fontFamily":"Coming Soon"
       },
       "text":{
-        "color":"#223344",
+        "color":"#666",
         "pixelsize":32,
         "text":"Oh.. Hello there..",
         "wrap":true
@@ -72,7 +71,7 @@ class Dialog extends Actor {
     let g = this.scene.game.ctx;
     super.render();
     g.fillStyle = "#ffffee";
-    g.fillRect(this.offset.x, this.offset.y, this.size.x, this.size.y);
+    g.clearRect(this.offset.x, this.offset.y, this.size.x, this.size.y);
     g.translate(this.offset.x, this.offset.y);
     g.translate(this._text.position.x+Math.random(), this._text.position.y+Math.random());
     this._text.render();

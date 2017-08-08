@@ -10,6 +10,7 @@ class Trigger extends Actor {
   public scene:AdventureScene;
   public lock=3;
   public goto:string;
+  public confirm:boolean;
 
   constructor(scene:AdventureScene, obj:any) {
     super(scene, obj);
@@ -24,11 +25,16 @@ class Trigger extends Actor {
     super.render();
   }
 
-  trigger() {
+  hover() {
+    let joy = this.scene.game.joypad;
     if (!this.lock) {
-      this.scene.script.goto(this.goto);
+      if (joy.delta.fire === 1 || !this.confirm) {
+        this.scene.script.goto(this.goto);
+        this.lock = 3;
+      }
+    } else {
+      this.lock = 3;
     }
-    this.lock = 3;
   }
 
   /*

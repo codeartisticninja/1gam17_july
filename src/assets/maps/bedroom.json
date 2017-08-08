@@ -19,11 +19,118 @@
                  "id":1,
                  "name":"",
                  "rotation":0,
-                 "type":"",
+                 "type":"Aye",
                  "visible":true,
                  "width":128,
-                 "x":225,
-                 "y":420
+                 "x":105,
+                 "y":435
+                }, 
+                {
+                 "height":90,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":960,
+                 "x":0,
+                 "y":435
+                }, 
+                {
+                 "height":420,
+                 "id":4,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":960,
+                 "x":0,
+                 "y":-15
+                }, 
+                {
+                 "height":420,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":60,
+                 "x":0,
+                 "y":105
+                }, 
+                {
+                 "height":420,
+                 "id":6,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Wall",
+                 "visible":true,
+                 "width":60,
+                 "x":900,
+                 "y":105
+                }, 
+                {
+                 "height":105,
+                 "id":7,
+                 "name":"",
+                 "properties":
+                    {
+                     "confirm":true,
+                     "goto":"#sleep"
+                    },
+                 "propertytypes":
+                    {
+                     "confirm":"bool",
+                     "goto":"string"
+                    },
+                 "rotation":0,
+                 "type":"Trigger",
+                 "visible":true,
+                 "width":165,
+                 "x":90,
+                 "y":330
+                }, 
+                {
+                 "height":105,
+                 "id":9,
+                 "name":"",
+                 "properties":
+                    {
+                     "confirm":true,
+                     "goto":"#computer"
+                    },
+                 "propertytypes":
+                    {
+                     "confirm":"bool",
+                     "goto":"string"
+                    },
+                 "rotation":0,
+                 "type":"Trigger",
+                 "visible":true,
+                 "width":165,
+                 "x":360,
+                 "y":330
+                }, 
+                {
+                 "height":105,
+                 "id":10,
+                 "name":"",
+                 "properties":
+                    {
+                     "confirm":true,
+                     "goto":"#fridge"
+                    },
+                 "propertytypes":
+                    {
+                     "confirm":"bool",
+                     "goto":"string"
+                    },
+                 "rotation":0,
+                 "type":"Trigger",
+                 "visible":true,
+                 "width":105,
+                 "x":750,
+                 "y":330
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -31,10 +138,18 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":3,
+ "nextobjectid":11,
  "orientation":"orthogonal",
+ "properties":
+    {
+     "loadScript":".\/assets\/story\/bedroom.xml"
+    },
+ "propertytypes":
+    {
+     "loadScript":"string"
+    },
  "renderorder":"right-down",
- "tiledversion":"2017.07.25",
+ "tiledversion":"1.0.2",
  "tileheight":60,
  "tilesets":[
         {

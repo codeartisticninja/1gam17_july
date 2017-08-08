@@ -1,0 +1,14 @@
+story
+  #init
+    pre.
+      {
+        $.food = 100;
+        $.sleep = 100;
+        "+"
+      }
+    wait 8
+  #enter
+    p This dream again..?
+    wait {game.frameRate * 32}
+    scene bedroom
+    

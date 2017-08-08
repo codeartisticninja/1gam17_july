@@ -13,7 +13,7 @@ import Text        = require("./actors/Text");
 /**
  * Scene class
  * 
- * @date 18-jul-2017
+ * @date 08-aug-2017
  */
 
 class Scene {
@@ -37,6 +37,7 @@ class Scene {
     var _t = this;
     this.actors = [];
     this.actorsByType = {};
+    this.clearAllAlarms();
     if (this.mapUrl) {
       this.game.loading++;
       http.get(this.mapUrl, function(res){
@@ -85,6 +86,13 @@ class Scene {
 
   update() {
     let i=0;
+    for (var alarm of this._alarms) {
+      alarm.frames--;
+      if (alarm.frames <= 0) {
+        this.clearAlarm(alarm);
+        alarm.cb();
+      }
+    }
     for (var actor of this.actors) {
       actor.update();
       if (i) {
@@ -213,10 +221,33 @@ class Scene {
     }
   }
 
+  clearAllAlarms() {
+    this._alarms = [];
+  }
+
+  setAlarm(frames:number, cb:Function) {
+    let alarm = {
+      frames: frames,
+      cb: cb
+    };
+    this._alarms.push(alarm);
+    return alarm;
+  }
+
+  clearAlarm(alarm:any) {
+    setTimeout(()=>{
+      let i = this._alarms.indexOf(alarm);
+      if (i > -1) {
+        this._alarms.splice(i, 1);
+      }
+    });
+  }
+
 
   /*
     _privates
   */
+  private _alarms:Array<any>=[];
 
 }
 export = Scene;

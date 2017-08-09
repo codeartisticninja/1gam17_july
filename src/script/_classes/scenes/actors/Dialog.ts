@@ -35,7 +35,7 @@ class Dialog extends Actor {
         "fontFamily":"Coming Soon"
       },
       "text":{
-        "color":"#ffe",
+        "color":"#bef",
         "pixelsize":32,
         "text":"Oh.. Hello there..",
         "wrap":true,

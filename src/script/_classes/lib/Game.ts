@@ -15,7 +15,7 @@ if (!Element.prototype.requestFullscreen) {
 /**
  * BaseGameApp class
  * 
- * @date 02-jul-2017
+ * @date 09-aug-2017
  */
 
 class Game {
@@ -142,18 +142,29 @@ class Game {
 
   private _tick(t:number=0) {
     cancelAnimationFrame(this._tickTO);
-    var updates = 0;
-    if (this._nextFrameTime < t-50) this._nextFrameTime = t;
-    while(this._nextFrameTime <= t) {
-      this.update();
-      this._nextFrameTime += this._frameInterval;
-      updates++;
+    if (this.loaded < this.loading) {
+      let h = 8, m = 0;
+      this._ctx.fillStyle = "black";
+      this._ctx.fillRect(m,this._canvas.height-h-m, this._canvas.width-m*2, h);
+      this._ctx.fillStyle = "white";
+      this._ctx.strokeStyle = "black";
+      this._ctx.fillRect(m,this._canvas.height-h-m, (this._canvas.width-m*2)*(this.loaded/this.loading), h);
+      // this._ctx.strokeRect(m,this._canvas.height-h-m, this._canvas.width-m*2, h);
+    } else {
+      var updates = 0;
+      this.loading = this.loaded = 0;
+      if (this._nextFrameTime < t-50) this._nextFrameTime = t;
+      while(this._nextFrameTime <= t) {
+        this.update();
+        this._nextFrameTime += this._frameInterval;
+        updates++;
+      }
+      if (updates) {
+        this.render();
+        this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
+        this._ctx.drawImage(this.canvas, 0, 0);
+      } 
     }
-    if (updates) {
-      this.render();
-      this._ctx.clearRect(0, 0, this._canvas.width, this._canvas.height);
-      this._ctx.drawImage(this.canvas, 0, 0);
-    } 
     this._tickTO = requestAnimationFrame(this._tick);
   }
 

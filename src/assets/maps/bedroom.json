@@ -10,21 +10,9 @@
          "y":0
         }, 
         {
-         "draworder":"topdown",
+         "draworder":"index",
          "name":"objects",
          "objects":[
-                {
-                 "gid":1,
-                 "height":128,
-                 "id":1,
-                 "name":"",
-                 "rotation":0,
-                 "type":"Aye",
-                 "visible":true,
-                 "width":128,
-                 "x":105,
-                 "y":435
-                }, 
                 {
                  "height":90,
                  "id":3,
@@ -70,8 +58,9 @@
                  "y":105
                 }, 
                 {
-                 "height":105,
-                 "id":7,
+                 "gid":33,
+                 "height":192,
+                 "id":11,
                  "name":"",
                  "properties":
                     {
@@ -84,15 +73,16 @@
                      "goto":"string"
                     },
                  "rotation":0,
-                 "type":"Trigger",
+                 "type":"Thing",
                  "visible":true,
-                 "width":165,
-                 "x":90,
-                 "y":330
+                 "width":192,
+                 "x":60,
+                 "y":435
                 }, 
                 {
-                 "height":105,
-                 "id":9,
+                 "gid":35,
+                 "height":192,
+                 "id":12,
                  "name":"",
                  "properties":
                     {
@@ -105,15 +95,16 @@
                      "goto":"string"
                     },
                  "rotation":0,
-                 "type":"Trigger",
+                 "type":"Thing",
                  "visible":true,
-                 "width":165,
-                 "x":360,
-                 "y":330
+                 "width":192,
+                 "x":345,
+                 "y":435
                 }, 
                 {
-                 "height":105,
-                 "id":10,
+                 "gid":37,
+                 "height":192,
+                 "id":13,
                  "name":"",
                  "properties":
                     {
@@ -126,11 +117,23 @@
                      "goto":"string"
                     },
                  "rotation":0,
-                 "type":"Trigger",
+                 "type":"Thing",
                  "visible":true,
-                 "width":105,
-                 "x":750,
-                 "y":330
+                 "width":192,
+                 "x":675,
+                 "y":435
+                }, 
+                {
+                 "gid":1,
+                 "height":128,
+                 "id":1,
+                 "name":"",
+                 "rotation":0,
+                 "type":"Aye",
+                 "visible":true,
+                 "width":128,
+                 "x":105,
+                 "y":435
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -138,7 +141,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":11,
+ "nextobjectid":14,
  "orientation":"orthogonal",
  "properties":
     {
@@ -149,7 +152,7 @@
      "loadScript":"string"
     },
  "renderorder":"right-down",
- "tiledversion":"1.0.2",
+ "tiledversion":"2017.07.25",
  "tileheight":60,
  "tilesets":[
         {
@@ -164,6 +167,19 @@
          "tilecount":32,
          "tileheight":128,
          "tilewidth":128
+        }, 
+        {
+         "columns":2,
+         "firstgid":33,
+         "image":"..\/sprites\/things.png",
+         "imageheight":1024,
+         "imagewidth":512,
+         "margin":0,
+         "name":"things",
+         "spacing":0,
+         "tilecount":10,
+         "tileheight":192,
+         "tilewidth":192
         }],
  "tilewidth":60,
  "type":"map",

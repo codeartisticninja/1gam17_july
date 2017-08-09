@@ -9,6 +9,7 @@ import Script      = require("../lib/utils/Script");
 import Aye         = require("./actors/Aye");
 import Fish        = require("./actors/Fish");
 import Trigger     = require("./actors/Trigger");
+import Thing       = require("./actors/Thing");
 import Dialog      = require("./actors/Dialog");
 
 /**
@@ -24,6 +25,7 @@ class AdventureScene extends Scene {
     this.actorTypes["Aye"] = Aye;
     this.actorTypes["Fish"] = Fish;
     this.actorTypes["Trigger"] = Trigger;
+    this.actorTypes["Thing"] = Thing;
   }
 
   reset() {
@@ -64,6 +66,7 @@ class AdventureScene extends Scene {
   update() {
     super.update();
     this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Trigger"], this.AyeMeetsTrigger, this);
+    this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Thing"], this.AyeMeetsTrigger, this);
     this.onOverlap(this.actorsByType["Aye"], this.actorsByType["Wall"], this.AyeMeetsWall, this);
     this.onOverlap(this.actorsByType["Fish"], this.actorsByType["Aye"], this.FishMeetsAye, this);
   }

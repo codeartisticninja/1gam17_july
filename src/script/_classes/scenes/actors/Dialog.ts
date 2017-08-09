@@ -14,10 +14,10 @@ class Dialog extends Actor {
   constructor(scene:AdventureScene) {
     super(scene, {
       "type":"Dialog",
-      "x":8,
-      "y":scene.game.canvas.height-8-42,
-      "width":scene.game.canvas.width-16,
-      "height":42,
+      "x":0,
+      "y":scene.game.canvas.height-64,
+      "width":scene.game.canvas.width,
+      "height":48,
       "visible":false,
       "properties":{
         "parallax":0,
@@ -35,10 +35,11 @@ class Dialog extends Actor {
         "fontFamily":"Coming Soon"
       },
       "text":{
-        "color":"#666",
+        "color":"#ffe",
         "pixelsize":32,
         "text":"Oh.. Hello there..",
-        "wrap":true
+        "wrap":true,
+        "halign": "center"
       }
     });
   }
@@ -71,7 +72,7 @@ class Dialog extends Actor {
     let g = this.scene.game.ctx;
     super.render();
     g.fillStyle = "#ffffee";
-    g.clearRect(this.offset.x, this.offset.y, this.size.x, this.size.y);
+    // g.clearRect(this.offset.x, this.offset.y, this.size.x, this.size.y);
     g.translate(this.offset.x, this.offset.y);
     g.translate(this._text.position.x+Math.random(), this._text.position.y+Math.random());
     this._text.render();

@@ -92,7 +92,7 @@ class AdventureScene extends Scene {
   */
 
   private _gotoEnter() {
-    if (this.script) {
+    if (this.script && this.script.storyTree) {
       this.script.goto("#enter");
     } else {
       setTimeout(this._gotoEnter.bind(this), 1024);

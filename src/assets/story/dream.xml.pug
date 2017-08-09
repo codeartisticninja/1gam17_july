@@ -8,8 +8,9 @@ story
       }
     wait 8
   #enter
+    pre {setTimeout(function(){s.goto("#waking")});"+"}
     wait 20
     p This dream again..?
+  #waking
     wait {game.frameRate * 32}
     scene bedroom
-    

@@ -41,12 +41,20 @@ class Aye extends Actor {
   }
 
   doNothing() {
+    for(let thing of this.scene.actorsByType["Thing"]) {
+      if (this.overlapsWith(thing)) {
+        thing.deactivate();
+      }
+    }
     this.state = null;
   }
 
   doSomething() {
-    for(let trig of this.scene.actorsByType["Trigger"]) {
-      if (this.overlapsWith(trig)) this.position.x = trig.position.x;
+    for(let thing of this.scene.actorsByType["Thing"]) {
+      if (this.overlapsWith(thing)) {
+        this.position.x = thing.position.x;
+        thing.activate();
+      }
     }
     this.state = "doing";
     this.playAnimation("do");
@@ -54,8 +62,11 @@ class Aye extends Actor {
   }
 
   sleep() {
-    for(let trig of this.scene.actorsByType["Trigger"]) {
-      if (this.overlapsWith(trig)) this.position.x = trig.position.x;
+    for(let thing of this.scene.actorsByType["Thing"]) {
+      if (this.overlapsWith(thing)) {
+        this.position.x = thing.position.x;
+        thing.activate();
+      }
     }
     this.state = "sleeping";
     this.scale.x = 1;

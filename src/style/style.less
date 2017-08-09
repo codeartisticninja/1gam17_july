@@ -8,6 +8,7 @@
 @import "_fullscreen";
 
 html, .fullscreen {
+  background-image: url("paper_texture.png");
   font-family: "Coming Soon", cursive;
   transition-duration: 1s;
 
@@ -21,6 +22,15 @@ html, .fullscreen {
   background-color: #001;
   color: #ffe;
 }
+
+#game {
+  box-shadow: 0 0 1em rgba(0, 0, 1, 50%);
+  
+  @media screen and (min-width: 960px) {
+    margin: 1em auto;
+  }
+}
+
 
 .dream :fullscreen { .dream(); }
 .dream :-moz-full-screen { .dream(); }

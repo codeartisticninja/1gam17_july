@@ -4,8 +4,12 @@ import Vector2 = require("./Vector2");
 /**
  * joypad module for unified game controls on the web
  * 
- * @date 26-apr-2017
+ * @date 10-aug-2017
  */
+if (!window.requestAnimationFrame) {
+  window.requestAnimationFrame = webkitRequestAnimationFrame || function(cb:Function){ return setTimeout(cb, 32) };
+  window.cancelAnimationFrame = webkitCancelAnimationFrame || clearTimeout;
+}
 interface JoyTouch {
     id:any,
     btn:boolean,

@@ -11,11 +11,15 @@ if (!Element.prototype.requestFullscreen) {
         Element.prototype["mozRequestFullScreen"] ||
         Element.prototype["msRequestFullscreen"];
 }
+if (!window.requestAnimationFrame) {
+  window.requestAnimationFrame = webkitRequestAnimationFrame || function(cb:Function){ return setTimeout(cb, 32, Date.now()) };
+  window.cancelAnimationFrame = webkitCancelAnimationFrame || clearTimeout;
+}
 
 /**
  * BaseGameApp class
  * 
- * @date 09-aug-2017
+ * @date 10-aug-2017
  */
 
 class Game {
@@ -153,7 +157,7 @@ class Game {
     } else {
       var updates = 0;
       this.loading = this.loaded = 0;
-      if (this._nextFrameTime < t-50) this._nextFrameTime = t;
+      if (this._nextFrameTime < t-512) this._nextFrameTime = t;
       while(this._nextFrameTime <= t) {
         this.update();
         this._nextFrameTime += this._frameInterval;

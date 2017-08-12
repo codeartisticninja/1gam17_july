@@ -4,7 +4,7 @@ import Tween = require("./Tween");
 /**
  * MediaPlayer class
  * 
- * @date 26-jun-2017
+ * @date 12-aug-2017
  */
 
 class MediaPlayer {
@@ -34,7 +34,8 @@ class MediaPlayer {
     this.players.push(new Audio());
     this.players.push(new Audio());
     if (this.enabled) {
-      document.body.addEventListener("touchstart", this._unlockPlayers);
+      document.body.addEventListener("click", this._unlockPlayers);
+      document.body.addEventListener("keypress", this._unlockPlayers);
       if (url) this.play(url);
     }
   }
@@ -48,7 +49,9 @@ class MediaPlayer {
     player.src = url;
     player.volume = this.volume;
     player.loop = loop;
-    player.play();
+    player.play().catch((error) => {
+      this._unlockThisPlayer(player);
+    });
   }
 
   pause(fadeDuration=1024) {
@@ -74,9 +77,21 @@ class MediaPlayer {
     var player:HTMLAudioElement, i=0;
     for (player of this.players) {
       player.play();
-      if (i++) player.pause();
+      // if (i++) player.pause();
     }
-    document.body.removeEventListener("touchstart", this._unlockPlayers);
+    document.body.removeEventListener("click", this._unlockPlayers);
+    document.body.removeEventListener("keypress", this._unlockPlayers);
+  }
+
+  private _unlockThisPlayer(player:HTMLAudioElement) {
+    var cb = ()=>{
+      player.play().then(()=>{
+        document.body.removeEventListener("click",cb);
+        document.body.removeEventListener("keypress",cb);
+      });
+    };
+    document.body.addEventListener("click",cb);
+    document.body.addEventListener("keypress",cb);
   }
 
 }

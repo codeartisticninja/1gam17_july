@@ -26,6 +26,11 @@ class MyGame extends Game {
       document.body.parentElement.classList.remove(name);
     }
     document.body.parentElement.classList.add(sceneName);
+    if (sceneName === "dream") {
+      this.mediaChannels.ambiance.play("./assets/sounds/water.mp3", true);
+    } else {
+      this.mediaChannels.ambiance.pause();
+    }
     super.startScene(sceneName);
   }
 

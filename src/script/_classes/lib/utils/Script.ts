@@ -3,7 +3,7 @@
 /**
  * Script class
  * 
- * @date 20-jul-2017
+ * @date 12-aug-2017
  */
 
 class Script {
@@ -158,10 +158,11 @@ class Script {
       str = str.replace("{"+brack+"}", res);
       pos = str.indexOf("{");
     }
-    return str;
+    return str.trim();
   }
   private _evaluateBrack(tag:string) {
     var parts = tag.split("|");
+    parts[0] = parts[0].substr(1);
     var visits = this.getVisits(".");
     switch (tag[0]) {
       case "~":

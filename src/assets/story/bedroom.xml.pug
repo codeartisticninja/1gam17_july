@@ -9,30 +9,77 @@ story
     .hungry(if="{$.food LTE 0}")
       p I'm too hungry to sleep..
     .not-sleepy(if="{$.sleep GT 0}")
-      p I'm not really sleepy..
-    sleep tight
-    wait {game.frameRate*1}
-    pre {$.food -= 66;"+"}
-    pre {$.sleep = 100;"+"}
-    scene dream
+      p I'm not really sleepy right now..
+    .else
+      sleep tight
+      wait {game.frameRate*1}
+      pre {$.food -= 66;"+"}
+      pre {$.sleep = 100;"+"}
+      scene dream
   #computer
     .hungry(if="{$.food LTE 0}")
       p I'm too hungry..
     .sleepy(if="{$.sleep LTE 0}")
       p I'm too sleepy..
-    do computer stuff
-    wait {game.frameRate*8}
-    pre {$.food -= 33;"+"}
-    pre {$.sleep -= 33;"+"}
-    idle
+    .else
+      do computer stuff
+      wait {game.frameRate*8}
+      pre {$.food -= 33;"+"}
+      pre {$.sleep -= 33;"+"}
+      idle
+      p.
+        {~
+          Hmm.. still no likes.. |
+          So much negativity..
+          People are so stupid.. |
+          Heh.. Cats are funny.. |
+          That nigerian prince seems like a nice guy.. |
+          First..!!1! |
+          Huh.. I guess it wasn't a dream..
+          He actually became president.. |
+          I can haz life..? |
+          Did they ever find out what the fox said..? |
+          I can't believe he just tweeted that.. |
+          Starving kids..? really..??
+          Right in front of my salad..??? |
+          I guess some people are just talented.. |
+          Awww.. what a cute couple.. |
+          I wish people would research before they share..
+          ..so I don't have to do it myself.. |
+          Fucking fidget spinners.. |
+          I bet that video was totes fake.. |
+          Politicians be cray cray..
+        }
   #fridge
     // .not-hungry(if="{$.food GT 0}")
       p I'm not really hungry..
     // .sleepy(if="{$.sleep LTE 0}")
       p I'm too sleepy to eat..
-    do some eating
-    wait {game.frameRate*8}
-    pre {$.food = 100;"+"}
-    pre {$.sleep -= 33;"+"}
-    idle
+    .else
+      do some eating
+      wait {game.frameRate*8}
+      pre {$.food = 100;"+"}
+      pre {$.sleep -= 33;"+"}
+      idle
+      p.
+        {@
+          Hmm.. low on milk.. |
+          I hope this doesn't make me fat.. |
+          I wonder where I left my wallet.. |
+          Armpits getting a bit smelly.. |
+          Hmm.. when did I last clean this place..? |
+          I should really do the dishes...
+          eventually.. |
+          Hmm.. which of these underpants are least smelly..? |
+          Hello Mr. Spider.. You owe me rent.. |
+          Hmmmmm.... |
+          Maybe I'll have a front door some day.. |
+          Okay.. |
+          I don't like how the cheese is looking at me.. |
+          Should I get a haircut..?
+          ..or hair..? |
+          Huh.. Weird.. |
+          guess I'll add it to the shopping list.. |
+          yum...
+        }
     

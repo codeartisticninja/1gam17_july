@@ -49,7 +49,8 @@ class MediaPlayer {
     player.src = url;
     player.volume = this.volume;
     player.loop = loop;
-    player.play().catch((error) => {
+    let p = player.play();
+    p && p.catch && p.catch((error) => {
       this._unlockThisPlayer(player);
     });
   }
@@ -85,7 +86,8 @@ class MediaPlayer {
 
   private _unlockThisPlayer(player:HTMLAudioElement) {
     var cb = ()=>{
-      player.play().then(()=>{
+      let p = player.play();
+      p && p.then && p.then(()=>{
         document.body.removeEventListener("click",cb);
         document.body.removeEventListener("keypress",cb);
       });

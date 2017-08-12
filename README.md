@@ -1,6 +1,6 @@
 Sleeping with the fishes
 ========================
-Yet another weird game..
+Yet another pretentious anti-game.. *You* figure out what it means..
 
 Credits
 -------

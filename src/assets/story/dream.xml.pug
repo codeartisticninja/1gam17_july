@@ -6,11 +6,16 @@ story
         $.sleep = 100;
         "+"
       }
-    wait 8
+    wait {game.frameRate * 3}
+    pre #wisdom
   #enter
-    pre {setTimeout(function(){s.goto("#waking")});"+"}
-    wait 20
-    p This dream again..?
-  #waking
     wait {game.frameRate * 32}
     scene bedroom
+  #wisdom
+    p I should buy a boat..
+    wait {game.frameRate * 1}
+    p Chicks digs scars..
+    wait {game.frameRate * 1}
+    p You miss 100% of the shots you don't take..
+    wait {game.frameRate * 1}
+    pre #wisdom

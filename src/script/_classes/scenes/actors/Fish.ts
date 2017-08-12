@@ -11,7 +11,7 @@ class Fish extends Actor {
 
   constructor(scene:Scene, obj:any) {
     super(scene, obj);
-    this.addAnimation("swim",  [ 0, 1, 2, 3, 4, 5, 6, 7]);
+    this.addAnimation("swim",  [ 0, 1, 2, 3, 4, 5, 6, 7], Math.random()+1);
     this.playAnimation("swim");
     this.velocity.x = 8;
   }

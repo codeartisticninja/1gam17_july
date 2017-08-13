@@ -8,7 +8,7 @@ import lazyJSON = require("../../utils/lazyJSON");
 /**
  * Actor class
  * 
- * @date 18-jul-2017
+ * @date 13-aug-2017
  */
 
 interface Animation {
@@ -133,6 +133,10 @@ class Actor {
     }
   }
 
+  overlapsWithPoint(v:Vector2) {
+    return v.x > this.left && v.y < this.right &&
+      v.y > this.top && v.y < this.bottom;
+  }
   overlapsWith(actor:Actor) {
     return this._overlap2D(this.top, this.left, this.bottom, this.right,
       actor.top, actor.left, actor.bottom, actor.right);
@@ -179,6 +183,9 @@ class Actor {
   }
   stopAnimation() {
     this.animation = null;
+  }
+
+  click() {
   }
 
   /*

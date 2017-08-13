@@ -13,7 +13,7 @@ import Text        = require("./actors/Text");
 /**
  * Scene class
  * 
- * @date 08-aug-2017
+ * @date 13-aug-2017
  */
 
 class Scene {
@@ -27,6 +27,7 @@ class Scene {
   public gravity:Vector2 = new Vector2();
   public camera:Vector2 = new Vector2();
   public boundCamera=true;
+  public mouse:Vector2 = new Vector2();
   public mapData:any;
 
   constructor(public game:Game, public mapUrl?:string) {
@@ -241,6 +242,17 @@ class Scene {
         this._alarms.splice(i, 1);
       }
     });
+  }
+
+  click(x:number, y:number) {
+    let m = new Vector2(x,y);
+    let p = new Vector2();
+    this.mouse.copyFrom(m);
+    this.mouse.add(this.camera);
+    for (var actor of this.actors) {
+      p.copyFrom(this.camera).multiplyXY(actor.parallax).add(m);
+      if (actor.overlapsWithPoint(p)) actor.click();
+    }
   }
 
 

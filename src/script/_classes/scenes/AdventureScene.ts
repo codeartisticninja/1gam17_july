@@ -71,6 +71,11 @@ class AdventureScene extends Scene {
     this.onOverlap(this.actorsByType["Fish"], this.actorsByType["Aye"], this.FishMeetsAye, this);
   }
 
+  click(x:number, y:number) {
+    super.click(x,y);
+    this.actorsByType["Aye"][0].goTo(this.mouse);
+  }
+
   FishMeetsAye(fish:Fish, aye:Aye) {
     fish.snapToEdge(aye);
     fish.scale.x *= -1;

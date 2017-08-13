@@ -4,6 +4,7 @@ import MediaPlayer = require("./utils/MediaPlayer");
 import Sound       = require("./utils/Sound");
 import Scene       = require("./scenes/Scene");
 import joypad      = require("./utils/webJoypad");
+import Vector2     = require("./utils/Vector2");
 
 if (!Element.prototype.requestFullscreen) {
     Element.prototype.requestFullscreen = 
@@ -19,7 +20,7 @@ if (!window.requestAnimationFrame) {
 /**
  * BaseGameApp class
  * 
- * @date 10-aug-2017
+ * @date 13-aug-2017
  */
 
 class Game {
@@ -132,6 +133,7 @@ class Game {
     this.canvas.width = width;
     this.canvas.height = height;
     this.ctx = this.canvas.getContext("2d");
+    this._canvas.addEventListener("click", this._click.bind(this));
     this._tick();
   }
   private _initAudio() {
@@ -195,6 +197,12 @@ class Game {
 
   private _hideCursor() {
     this.container.style.cursor = "none";
+  }
+
+  private _click(e:MouseEvent) {
+    let scaleX = this._canvas.width / this._canvas.offsetWidth;
+    let scaleY = this._canvas.height / this._canvas.offsetHeight;
+    if (this.scene) this.scene.click(e.offsetX * scaleX, e.offsetY * scaleY);
   }
 }
 export = Game;

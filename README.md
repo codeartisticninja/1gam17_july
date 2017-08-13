@@ -1,5 +1,5 @@
-Sleeping with the fishes
-========================
+This is fine
+============
 Yet another pretentious anti-game.. *You* figure out what it means..
 
 Credits

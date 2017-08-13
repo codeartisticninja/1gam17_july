@@ -46,25 +46,28 @@ class Dialog extends Actor {
 
   update() {
     let joy = this.scene.game.joypad;
-    let cb = this._cb;
+    if (!this._msg) {
+      return this.visible = false;
+    }
     if (this._chars < this._msg.length) {
       this._chars+=2;
       this._text.text = this._msg.substr(0, this._chars);
     } else {
       this._text.text = this._msg;
     }
-    if (cb && joy.delta.fire === 1) {
+    if (joy.delta.fire === 1) {
       if (this._chars < this._msg.length) {
         this._chars = this._msg.length;
-      } else if(this._lines && this._lines.length) {
+      } else {
         this._msg = this._lines.shift();
         this._chars = 0;
-      } else {
-        this.visible = false;
-        this._msg = "";
-        this._cb = null;
-        cb();
       }
+    }
+    if (this._msg instanceof Function) {
+      let cb = this._msg;
+      this._msg = this._lines.shift();
+      this._chars = 0;
+      return cb();
     }
   }
 
@@ -81,22 +84,22 @@ class Dialog extends Actor {
   say(txt:string, cb:Function) {
     this._text.text = txt;
     this._text.render();
-    this._lines = this._text.lines;
-    this._msg = this._lines.shift();
-
+    this._lines = this._lines.concat(this._text.lines);
+    this._lines.push(cb);
+    if (!this._msg) {
+      this._msg = this._lines.shift();
+      this._chars = 0;
+    }
     this.visible = true;
-    this._chars = 0;
-    this._cb = cb;
   }
 
   /*
     _privates
   */
-  private _msg:string="fuck";
+  private _msg:any="";
   private _chars:number=0;
-  private _cb:Function;
   private _text:Text;
-  private _lines:string[];
+  private _lines:any[]=[];
 
 
 }

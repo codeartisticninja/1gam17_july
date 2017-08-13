@@ -18,9 +18,9 @@ story
       scene dream
   #computer
     .hungry(if="{$.food LTE 0}")
-      p I'm too hungry..
+      p I should probably eat..
     .sleepy(if="{$.sleep LTE 0}")
-      p I'm too sleepy..
+      p I'm too sleepy to internet..
     .else
       do computer stuff
       wait {game.frameRate*8}
@@ -53,8 +53,8 @@ story
   #fridge
     // .not-hungry(if="{$.food GT 0}")
       p I'm not really hungry..
-    // .sleepy(if="{$.sleep LTE 0}")
-      p I'm too sleepy to eat..
+    .sleepy(if="{$.sleep LTE 50}")
+      p I should probably go to sleep..
     .else
       do some eating
       wait {game.frameRate*8}

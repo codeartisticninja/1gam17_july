@@ -53,7 +53,7 @@ story
   #fridge
     // .not-hungry(if="{$.food GT 0}")
       p I'm not really hungry..
-    .sleepy(if="{$.sleep LTE 50}")
+    .sleepy(if="{$.sleep LTE -50}")
       p I should probably go to sleep..
     .else
       do some eating

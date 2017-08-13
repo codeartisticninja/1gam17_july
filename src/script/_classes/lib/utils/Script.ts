@@ -3,7 +3,7 @@
 /**
  * Script class
  * 
- * @date 12-aug-2017
+ * @date 13-aug-2017
  */
 
 class Script {
@@ -51,8 +51,10 @@ class Script {
       var el = <Element>this.storyTree.importNode(current, true);
       this._cullChildren(el);
       var body = this._evaluate(el.textContent);
+      var done = false;
       this.commands[current.tagName](attrs, body, el, ()=>{
-        this.continue(current.nextElementSibling);
+        if (done=!done) this.continue(current.nextElementSibling);
+        done=true;
       });
     } else {
       this.variables[current.id+"_v"] = this.getVisits("")+1;

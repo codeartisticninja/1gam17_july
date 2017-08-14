@@ -6,26 +6,39 @@ story
         $.sleep = 100;
         "+"
       }
-    wait {game.frameRate * 3}
-    pre #wisdom
   #enter
-    wait {game.frameRate * 32}
-    scene bedroom
+    pre #wisdom
   #wisdom
-    p ...
+    wait {game.frameRate * 4}
+    pre #wisdom_{s.getVisits(".")}
+  #wisdom_1
     wait {game.frameRate * 10}
     p Hello..?
-    wait {game.frameRate * 10}
+    scene bedroom
+  #wisdom_2
+    wait {game.frameRate * 8}
     p What are you waiting for..?
-    wait {game.frameRate * 10}
-    p It's okay to be afraid..
-    wait {game.frameRate * 10}
-    p Hey..
-    wait {game.frameRate * 4}
-    p I believe in you..
-    wait {game.frameRate * 4}
-    p You're better than this..
-    wait {game.frameRate * 4}
-    p Don't be afrad to dream..
-    wait {game.frameRate * 4}
-    pre #wisdom
+    p Your life to be over..?
+    scene bedroom
+  #wisdom_3
+    p This is your third dream..
+    scene bedroom
+
+//
+  p You don't think you're worth more..?
+  p You think dreams are only for
+
+  p Is this really how you want to live..?
+  p Is this really how you want to die..?
+
+  p You're alive, but you're not living..
+
+  p I know the world can be a scary place..
+  p It's okay..
+
+  p I know you feel that you're not good enough..
+  p But I believe in you..
+
+  p I know you think that you're just going to fail..
+  p And you'd be right..
+

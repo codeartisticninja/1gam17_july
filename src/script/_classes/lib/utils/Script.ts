@@ -3,7 +3,7 @@
 /**
  * Script class
  * 
- * @date 13-aug-2017
+ * @date 14-aug-2017
  */
 
 class Script {
@@ -68,7 +68,7 @@ class Script {
     this.continue(this.getElement(path));
   }
 
-  getVisits(path:string, el?:Element) {
+  getVisits(path:string=".", el?:Element) {
     var el = this.getElement(path, el);
     return this.variables[el.id+"_v"] || 0;
   }

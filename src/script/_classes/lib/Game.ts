@@ -162,6 +162,7 @@ class Game {
       this._ctx.strokeStyle = "black";
       this._ctx.fillRect(m,this._canvas.height-h-m, (this._canvas.width-m*2)*(this.loaded/this.loading), h);
       // this._ctx.strokeRect(m,this._canvas.height-h-m, this._canvas.width-m*2, h);
+      this.loading -= .001;
     } else {
       var updates = 0;
       this.loading = this.loaded = 0;

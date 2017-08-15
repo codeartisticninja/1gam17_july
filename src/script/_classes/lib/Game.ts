@@ -20,7 +20,7 @@ if (!window.requestAnimationFrame) {
 /**
  * BaseGameApp class
  * 
- * @date 13-aug-2017
+ * @date 15-aug-2017
  */
 
 class Game {
@@ -107,6 +107,12 @@ class Game {
   }
   resume() {
     this._tick();
+  }
+
+  trackEvent(event:string) {
+    if (window["_paq"]) {
+      window["_paq"].push(['trackEvent', document.title, event]);
+    }
   }
 
   /*

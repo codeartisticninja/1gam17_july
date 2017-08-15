@@ -44,6 +44,9 @@ class AdventureScene extends Scene {
     this.script.commands["scene"] = (attrs:any, body:string) => {
       this.game.startScene(body);
     }
+    this.script.commands["track"] = (attrs:any, body:string) => {
+      this.game.trackEvent(body);
+    }
     this.script.commands["sleep"] = (attrs:any, body:string, el:Element, cb:Function) => {
       this.actorsByType["Aye"][0].sleep();
       cb();

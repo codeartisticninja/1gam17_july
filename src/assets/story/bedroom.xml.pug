@@ -1,10 +1,11 @@
 story
   #init
     sleep
-  #enter
-    wait {game.frameRate*4}
-    idle
+    wait {game.frameRate*3}
     p What a weird dream..
+  #enter
+    wait {game.frameRate*2}
+    idle
   #sleep
     .hungry(if="{$.food LTE 0}")
       p I'm too hungry to sleep..
@@ -12,7 +13,7 @@ story
       p I'm not really sleepy right now..
     .else
       sleep tight
-      wait {game.frameRate*1}
+      wait {game.frameRate*4}
       pre {$.food -= 66;"+"}
       pre {$.sleep = 100;"+"}
       scene dream
@@ -23,15 +24,14 @@ story
       p I'm too sleepy to internet..
     .else
       do computer stuff
-      wait {game.frameRate*8}
+      wait {game.frameRate*4}
       pre {$.food -= 33;"+"}
       pre {$.sleep -= 34;"+"}
-      idle
       p.
         {~
           Hmm.. still no likes.. |
           So much negativity..
-          People are so stupid.. |
+          Why are people so stupid..? |
           Heh.. Cats are funny.. |
           That nigerian prince seems like a nice guy.. |
           First..!!1! |
@@ -50,6 +50,8 @@ story
           I bet that video was totes fake.. |
           Politicians be cray cray..
         }
+      wait {game.frameRate*4}
+      idle
   #fridge
     // .not-hungry(if="{$.food GT 0}")
       p I'm not really hungry..
@@ -57,13 +59,11 @@ story
       p I should probably go to sleep..
     .else
       do some eating
-      wait {game.frameRate*8}
+      wait {game.frameRate*4}
       pre {$.food = 100;"+"}
       pre {$.sleep -= 33;"+"}
-      idle
       p.
         {@
-          Hmm.. low on milk.. |
           I hope this doesn't make me fat.. |
           I wonder where I left my wallet.. |
           Armpits getting a bit smelly.. |
@@ -74,6 +74,7 @@ story
           Hello Mr. Spider.. You owe me rent.. |
           Hmmmmm.... |
           Maybe I'll have a front door some day.. |
+          Hmm.. low on milk.. |
           Okay.. |
           I don't like how the cheese is looking at me.. |
           Should I get a haircut..?
@@ -82,4 +83,6 @@ story
           guess I'll add it to the shopping list.. |
           yum...
         }
+      wait {game.frameRate*4}
+      idle
     

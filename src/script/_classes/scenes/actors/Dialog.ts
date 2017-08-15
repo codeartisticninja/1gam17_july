@@ -90,6 +90,7 @@ class Dialog extends Actor {
       this._msg = this._lines.shift();
       this._chars = 0;
     }
+    this._text.text = "";
     this.visible = true;
   }
 

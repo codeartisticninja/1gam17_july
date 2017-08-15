@@ -25,7 +25,6 @@ class Aye extends Actor {
 
   update() {
     var joy = this.scene.game.joypad;
-    if (this.state) return super.update();
     if (this.target) {
       joy.dir.copyFrom(this.dir);
       let lastDist = this.distanceToTarget.magnitude;
@@ -36,6 +35,7 @@ class Aye extends Actor {
         joy.delta.fire++;
       }
     }
+    if (this.state) return super.update();
     if (joy.dir.magnitude) {
       this.velocity.copyFrom(joy.dir).multiplyXY(8);
       this.playAnimation("walk");

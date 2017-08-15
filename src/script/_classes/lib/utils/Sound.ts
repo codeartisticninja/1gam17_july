@@ -4,7 +4,7 @@
 /**
  * Sound class
  * 
- * @date 7-apr-2017
+ * @date 15-aug-2017
  */
 
 class Sound {
@@ -19,7 +19,7 @@ class Sound {
   marks = {};
   oneInstance:boolean;
 
-  constructor(src:string) {
+  constructor(src:string, cb?:Function) {
     if (!Sound.ctx) {
       Sound.ctx = new (window["AudioContext"] || window["webkitAudioContext"])();
     }
@@ -33,6 +33,7 @@ class Sound {
       if (this._playOnLoad) {
         this.play(this._playOnLoad);
       }
+      cb && cb();
     });
   }
 
@@ -52,7 +53,7 @@ class Sound {
     req.send();
   }
 
-  play(mark="_all") {
+  play(mark="_all", loop=false) {
     if (this.source && this.oneInstance) {
       this.source.stop();
     }
@@ -64,12 +65,18 @@ class Sound {
     this.source.connect(this.mainNode);
     this.source.buffer = this.buffer;
     this.source.start(0, this.marks[mark].start, this.marks[mark].duration);
+    if (loop) {
+      this.source.addEventListener("ended", ()=>{
+        this.source && this.play(mark, loop);
+      })
+    }
     this._playOnLoad=null;
   }
 
   stop() {
     if (this.source) {
       this.source.stop();
+      this.source = null;
     }
     this._playOnLoad=null;
   }

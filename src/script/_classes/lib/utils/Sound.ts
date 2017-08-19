@@ -4,7 +4,7 @@
 /**
  * Sound class
  * 
- * @date 15-aug-2017
+ * @date 19-aug-2017
  */
 
 class Sound {
@@ -65,7 +65,7 @@ class Sound {
     this.source.connect(this.mainNode);
     this.source.buffer = this.buffer;
     this.source.start(0, this.marks[mark].start, this.marks[mark].duration);
-    if (loop) {
+    if (loop && this.source.addEventListener) {
       this.source.addEventListener("ended", ()=>{
         this.source && this.play(mark, loop);
       })
@@ -75,7 +75,10 @@ class Sound {
 
   stop() {
     if (this.source) {
-      this.source.stop();
+      try {
+        this.source.stop();
+      } catch (error) {
+      }
       this.source = null;
     }
     this._playOnLoad=null;

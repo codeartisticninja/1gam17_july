@@ -25,15 +25,15 @@
     /* background-color: transparent;
     border: 1px solid black; */
     font-size: 1em;
-    opacity: 0.5;
+    opacity: 0.25;
     overflow: hidden;
     position: absolute;
     touch-action: none;
     transition: @active-duration @active-delay;
     transition: 8s 4s opacity;
-    bottom: 0;
-    width: 40vw;
-    height: 99vh;
+    bottom: 32px;
+    width: 100vw;
+    height: 50vh;
 
     .slider, .fire {
       background-color: black;
@@ -76,6 +76,7 @@
   }
   .left {
     border-right-width: 0;
+    display: none;
     left: 0;
 
     .slider, .fire {
@@ -88,6 +89,32 @@
 
     .slider, .fire {
       right: 0;
+    }
+  }
+
+
+  @media screen and (min-width: 400px) {
+    .left, .right {
+      display: block;
+      bottom: 0;
+      width: 40vw;
+      height: 99vh;
+    }
+
+    &.rc {
+      .left .knob {
+        background: url("./h_arrows.png") center no-repeat white;
+      }
+      .right .knob {
+        background: url("./v_arrows.png") center no-repeat white;
+      }
+      
+    }
+    
+    &.gc {
+      .right .slider {
+        display: none;
+      }
     }
   }
 
@@ -110,20 +137,5 @@
       }
     }
   }
-
-  &.rc {
-    .left .knob {
-      background: url("./h_arrows.png") center no-repeat white;
-    }
-    .right .knob {
-      background: url("./v_arrows.png") center no-repeat white;
-    }
-
-  }
-
-  &.gc {
-    .right .slider {
-      display: none;
-    }
-  }
+              
 }

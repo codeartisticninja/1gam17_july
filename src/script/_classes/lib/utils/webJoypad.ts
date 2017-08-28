@@ -55,6 +55,7 @@ module joypad {
             if (joypad.device === "touch") _showUI();
             _leftThumb = _createJoyTouch();
             _rightThumb = _createJoyTouch();
+            _leftThumb.center.x = 32;
           }
           _touchEnabled = true;
           break;
@@ -251,10 +252,10 @@ module joypad {
 
   function _scanTouches() {
     if (joypad.device !== "touch") return;
-    if (joypad.mode === "rc") {
+    if (joypad.mode === "rc" && window.innerWidth >= 400) {
       joypad.dir.x = _leftThumb.dir.x;
       joypad.dir.y = _rightThumb.dir.y;
-    } else if (joypad.mode === "gc") {
+    } else if (joypad.mode === "gc" && window.innerWidth >= 400) {
       joypad.dir.copyFrom(_leftThumb.dir);
       joypad.fire = _rightThumb.btn;
     } else {
@@ -300,9 +301,7 @@ module joypad {
     for (var j = 0; j < e.changedTouches.length; j++) {
       var touchEvent = e.changedTouches[j];
       var touch:JoyTouch;
-      if (_leftThumb.id === touchEvent.identifier)  {
-        touch = _leftThumb;
-      }
+      if (_leftThumb.id === touchEvent.identifier) touch = _leftThumb;
       if (_rightThumb.id === touchEvent.identifier) touch = _rightThumb;
       if (touch) {
         touch.dir.set(touchEvent.clientX, touchEvent.clientY);
@@ -407,7 +406,7 @@ module joypad {
     } else {
       leftKnob.style.left = (1+joypad.dir.x) + "em";
       leftKnob.style.top  = (1+joypad.dir.y) + "em";
-      if (joypad.mode !== "gc") {
+      if (joypad.mode !== "gc" || window.innerWidth < 400) {
         rightKnob.style.left = (1+joypad.dir.x) + "em";
         rightKnob.style.top  = (1+joypad.dir.y) + "em";
       }
@@ -428,7 +427,7 @@ module joypad {
     return {
       id:null,
       btn:false,
-      center: new Vector2(),
+      center: new Vector2(window.innerWidth-32, window.innerHeight),
       dir: new Vector2()
     };
   }

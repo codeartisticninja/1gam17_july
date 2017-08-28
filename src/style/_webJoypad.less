@@ -24,8 +24,8 @@
   .left, .right {
     /* background-color: transparent;
     border: 1px solid black; */
-    font-size: 8vw;
-    opacity: 0;
+    font-size: 1em;
+    opacity: 0.5;
     position: absolute;
     touch-action: none;
     transition: @active-duration @active-delay;
@@ -38,9 +38,11 @@
       background-color: black;
       border: 1px solid white;
       border-radius: 10em;
-      margin: 33vh 16vw;
+      // margin: 33vh 16vw;
       position: absolute;
-      transition: margin @active-duration @active-delay;
+      /* transition: left @active-duration @active-delay,
+                  right @active-duration @active-delay,
+                  bottom @active-duration @active-delay; */
       bottom: 0;
       width: 3em;
       height: 3em;
@@ -60,7 +62,7 @@
     }
     .fire {
       background: url("./x.png") center no-repeat black;
-      margin: 50vh 4vw;
+      // margin: 50vh 4vw;
       width: 2em;
       height: 2em;
       &.pending {
@@ -95,7 +97,6 @@
     .left, .right {
       /* background-color: black;
       border-width: 1px; */
-      font-size: 1em;
       opacity: 1;
       transition: @inactive-duration @inactive-delay;
       transition: 0s 0s opacity;
